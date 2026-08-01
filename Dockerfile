@@ -15,13 +15,13 @@ RUN apt-get update \
 # Add SSO plugin
 RUN git clone https://github.com/CyberLions/CTFd-SSO-plugin CTFd/plugins/CTFd-SSO-plugin
 
-# Add Group plugin
-RUN git clone https://github.com/CyberLions/CTFd-Groups-Plugin CTFd/plugins/CTFd-Groups-Plugin
+# # Add Group plugin
+# RUN git clone https://github.com/CyberLions/CTFd-Groups-Plugin CTFd/plugins/CTFd-Groups-Plugin
 
-# Add k8s container challenges plugin
-RUN git clone https://github.com/CyberLions/ctfd-k8s-challenges /tmp/ctfd-k8s-challenges \
-    && mv /tmp/ctfd-k8s-challenges/ctfd-plugin CTFd/plugins/k8s-challenges \
-    && rm -rf /tmp/ctfd-k8s-challenges
+# # Add k8s container challenges plugin
+# RUN git clone https://github.com/CyberLions/ctfd-k8s-challenges /tmp/ctfd-k8s-challenges \
+#     && mv /tmp/ctfd-k8s-challenges/ctfd-plugin CTFd/plugins/k8s-challenges \
+#     && rm -rf /tmp/ctfd-k8s-challenges
 
 RUN pip install --no-cache-dir -r requirements.txt \
     && for d in CTFd/plugins/*; do \
@@ -37,10 +37,10 @@ WORKDIR /opt/CTFd
 COPY --chown=1001:1001 --from=build /opt/venv /opt/venv
 # Copy SSO plugin
 COPY --chown=1001:1001 --from=build /opt/CTFd/CTFd/plugins/CTFd-SSO-plugin /opt/CTFd/CTFd/plugins/CTFd-SSO-plugin
-# Copy Group plugin
-COPY --chown=1001:1001 --from=build /opt/CTFd/CTFd/plugins/CTFd-Groups-Plugin /opt/CTFd/CTFd/plugins/CTFd-Groups-Plugin
-# Copy k8s container challenges plugin
-COPY --chown=1001:1001 --from=build /opt/CTFd/CTFd/plugins/k8s-challenges /opt/CTFd/CTFd/plugins/k8s-challenges
+# # Copy Group plugin
+# COPY --chown=1001:1001 --from=build /opt/CTFd/CTFd/plugins/CTFd-Groups-Plugin /opt/CTFd/CTFd/plugins/CTFd-Groups-Plugin
+# # Copy k8s container challenges plugin
+# COPY --chown=1001:1001 --from=build /opt/CTFd/CTFd/plugins/k8s-challenges /opt/CTFd/CTFd/plugins/k8s-challenges
 
 USER 1001
 EXPOSE 8000
