@@ -15,6 +15,9 @@ RUN apt-get update \
 # Add SSO plugin
 RUN git clone https://github.com/CyberLions/CTFd-SSO-plugin CTFd/plugins/CTFd-SSO-plugin
 
+# Add login -> SSO auto-redirect plugin
+COPY plugins/login-redirect CTFd/plugins/login-redirect
+
 # # Add Group plugin
 # RUN git clone https://github.com/CyberLions/CTFd-Groups-Plugin CTFd/plugins/CTFd-Groups-Plugin
 
@@ -37,6 +40,8 @@ WORKDIR /opt/CTFd
 COPY --chown=1001:1001 --from=build /opt/venv /opt/venv
 # Copy SSO plugin
 COPY --chown=1001:1001 --from=build /opt/CTFd/CTFd/plugins/CTFd-SSO-plugin /opt/CTFd/CTFd/plugins/CTFd-SSO-plugin
+# Copy login -> SSO auto-redirect plugin
+COPY --chown=1001:1001 --from=build /opt/CTFd/CTFd/plugins/login-redirect /opt/CTFd/CTFd/plugins/login-redirect
 # # Copy Group plugin
 # COPY --chown=1001:1001 --from=build /opt/CTFd/CTFd/plugins/CTFd-Groups-Plugin /opt/CTFd/CTFd/plugins/CTFd-Groups-Plugin
 # # Copy k8s container challenges plugin
